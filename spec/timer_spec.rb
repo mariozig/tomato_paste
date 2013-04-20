@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Timer do
-  subject(:timer) { Timer.new(5) }
+describe TomatoPaste::Timer do
+  subject(:timer) { described_class.new(5) }
 
   describe "#new" do
     its(:duration) { should == 5 }
@@ -17,6 +17,7 @@ describe Timer do
       thread = Thread.new do
         timer.start
       end
+      sleep 0.5
     end
 
     its(:state) { should eq :running }
