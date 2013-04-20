@@ -1,13 +1,11 @@
 require 'spec_helper'
 
 describe Timer do
-  subject(:timer) { Timer.new(100) }
+  subject(:timer) { Timer.new(5) }
 
   describe "#new" do
-    its(:duration) { should == 100 }
-    its(:start_time) { should be_nil }
-    its(:current_time) { should be_nil }
-    its(:end_time) { should be_nil }
+    its(:duration) { should == 5 }
+    its(:current) { should == 0 }
     its(:state) { should be :idle }
     its(:done?) { should be_false }
 
@@ -16,20 +14,18 @@ describe Timer do
 
   describe "#start" do
     before(:each) do
-      Timecop.freeze
-      timer.start
+      thread = Thread.new do
+        timer.start
+      end
     end
 
-    its(:state) { should be :running }
-    its(:start_time) { should == Time.now }
-    its(:end_time) { should == Time.now + timer.duration }
+    its(:state) { should eq :running }
   end
 
-  describe "#done?" do
+  describe "completion" do
     before(:each) do
-      Timecop.freeze
+      timer.interval_duration = 0
       timer.start
-      Timecop.travel(Time.now + timer.duration)
     end
 
     its(:done?) { should be_true }

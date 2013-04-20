@@ -1,20 +1,32 @@
 class Timer
-  attr_reader :duration, :end_time, :current_time, :state, :start_time
+  attr_reader :duration, :current, :state
+  attr_writer :interval_duration # exposed for testing purposes
 
-  def initialize(duration_in_seconds)
-    @duration = duration_in_seconds
+  def initialize(duration)
+    @duration = duration
+    @current = 0
     @state = :idle
+    @interval_duration = 1
   end
 
   def start
-    @start_time = Time.now
-    @end_time = @start_time + @duration
     @state = :running
+    time_becomes_a_loop
   end
 
   def done?
-    return false if @start_time.nil?
-    Time.now >= @start_time
+    @state == :done
   end
+
+  private
+    # Orbital http://www.youtube.com/watch?v=7Ab_VDg4M1s
+    def time_becomes_a_loop
+      while @current < @duration
+        Kernel.sleep @interval_duration
+        @current += 1
+      end
+
+      @state = :done
+    end
 
 end
