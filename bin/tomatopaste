@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+# require 'tomato_paste'
+require 'tomato_paste/cli'
+
+TomatoPaste::CLI.run
