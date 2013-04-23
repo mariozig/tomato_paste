@@ -10,6 +10,10 @@ module TomatoPaste
       @pomodori << pomodoro
     end
 
+    def current_pomodoro
+      @pomodori.last
+    end
+
     def big_break_time?
       # a big break should happen every 4 pomodori
       !@pomodori.empty? && @pomodori.count % 4 == 0

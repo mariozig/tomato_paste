@@ -17,6 +17,20 @@ describe TomatoPaste::Vine do
     it { should have_exactly(1).pomodori }
   end
 
+  describe "#current_pomodoro" do
+    let(:pomodoro1) { TomatoPaste::Pomodoro.new("Finish #current_pomodoro test for tomato page gem") }
+    let(:pomodoro2) { TomatoPaste::Pomodoro.new("Take complete control over the state of California") }
+
+    before(:each) do
+      vine.add(pomodoro1)
+      vine.add(pomodoro2)
+    end
+
+    it "returns the last created pomodoro, 'pomodoro2'" do
+      vine.current_pomodoro.should == pomodoro2
+    end
+  end
+
   describe "#big_break_time?" do
     before(:each) do
       4.times do |n|
