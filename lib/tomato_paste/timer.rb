@@ -1,3 +1,5 @@
+require "ruby-progressbar"
+
 module TomatoPaste
   class Timer
     attr_reader :duration, :current, :state
@@ -22,9 +24,12 @@ module TomatoPaste
     private
       # Orbital http://www.youtube.com/watch?v=7Ab_VDg4M1s
       def time_becomes_a_loop
+        progress_bar = ProgressBar.create(:format => '%a [%B] %p%% %f', :total => @duration, :smoothing => 0.6)
+
         while @current < @duration
           Kernel.sleep @interval_duration
           @current += 1
+          progress_bar.increment
         end
 
         @state = :done
