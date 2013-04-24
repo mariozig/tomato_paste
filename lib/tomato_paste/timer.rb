@@ -24,7 +24,9 @@ module TomatoPaste
     private
       # Orbital http://www.youtube.com/watch?v=7Ab_VDg4M1s
       def time_becomes_a_loop
-        progress_bar = ProgressBar.create(:format => '%a [%B] %p%% %f', :total => @duration, :smoothing => 0.6)
+        progress_bar = ProgressBar.create(:format => 'Elapsed %a [%B] %p%%',
+                                          :total => @duration,
+                                          :smoothing => 0.6)
 
         while @current < @duration
           Kernel.sleep @interval_duration
