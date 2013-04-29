@@ -39,7 +39,7 @@ module TomatoPaste
       banner
     end
 
-    def task_loop
+    def task_loop(big_break_duration=1200) # 20 minutes
       begin
         @output.print "\n\n"
         @output.print "Task Description: "
@@ -49,22 +49,27 @@ module TomatoPaste
         @output.puts
         @output.puts "Starting Pomodoro ##{@vine.pomodori.count}"
         @vine.current_pomodoro.work_timer.start
+        beepbeep
 
         if @vine.big_break_time?
           @output.puts "It's time for a big break. Come back in 20 minutes."
-          # big_break = Timer.new(1200) # 20 minutes
-          big_break = Timer.new(5) # 20 minutes
-          big_break.start
+          Timer.new(big_break_duration).start
         else
           @output.puts "Pomodoro ##{@vine.pomodori.count} complete. Break starts now!"
           @vine.current_pomodoro.break_timer.start
         end
 
+        beepbeep
         @output.puts "Break done!\n"
 
         @output.print "Do another Pomodoro? (Y/N): "
       end while @input.gets.upcase.chomp != "N"
     end
 
+    private
+      def beepbeep
+        print "\a"
+        print "\a"
+      end
   end
 end
