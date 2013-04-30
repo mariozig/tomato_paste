@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = TomatoPaste::VERSION
   spec.authors       = ["mariozig"]
   spec.email         = ["mariozig@gmail.com"]
-  spec.description   = %q{A concentrated version of the Pomodoro technique written in Ruby just for you (and me)}
-  spec.summary       = %q{A quick and dirty pomodoro timer}
+  spec.description   = %q{A concentrated version of the Pomodoro technique written in Ruby just for you (and me) to use on an OSX based terminal}
+  spec.summary       = %q{A quick and dirty pomodoro timer for OSX}
   spec.homepage      = "http://github.com/mariozig/tomato_paste"
   spec.license       = "MIT"
 
