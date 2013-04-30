@@ -1,8 +1,8 @@
 # TomatoPaste
 
-A simple terminal based Pomodoro tracker for OSX.
+A simple command line Pomodoro tracker for OSX.
 
-![Tomato Paste Banner](mariozig.github.io/tomato_paste/images/tomato-paste-banner.png)
+![Tomato Paste Banner](http://mariozig.github.io/tomato_paste/images/tomato-paste-banner.png)
 
 Tomato Paste is a very basic Pomodoro timer and it's pretty much a literal implementation of the technique's "Underlying principles" as described on [Wikipedia](http://en.wikipedia.org/wiki/Pomodoro_Technique#Underlying_principles).
 
@@ -15,7 +15,7 @@ Tomato Paste's Pomodoro cycle is as follows:
 * Notifications fire once the break is over
 * You're asked if you wish to do another Pomodoro
 * After 4 Pomodori have been completed, a 20 minute break is enforced
-* Loop!
+* Repeat!
 
 ## Installation
 
@@ -36,4 +36,3 @@ I wrote this gem for fun and I would love any constructive feedback!
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
-
