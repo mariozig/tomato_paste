@@ -1,6 +1,3 @@
-require 'tomato_paste'
-require 'tomato_paste/vine'
-require 'tomato_paste/pomodoro'
 require 'term/ansicolor'
 
 include Term::ANSIColor
@@ -46,30 +43,34 @@ module TomatoPaste
         task_description = @input.gets.chomp
 
         @vine.add(TomatoPaste::Pomodoro.new(task_description))
+
         @output.puts
-        @output.puts "Starting Pomodoro ##{@vine.pomodori.count}"
+        emit_notification "Starting Pomodoro ##{@vine.pomodori.count}"
+
         @vine.current_pomodoro.work_timer.start
-        beepbeep
+
+        TomatoPaste::Notification.play_audio_alert
 
         if @vine.big_break_time?
-          @output.puts "It's time for a big break. Come back in 20 minutes."
+          emit_notification "It's time for a big break. Come back in 20 minutes."
           Timer.new(big_break_duration).start
         else
-          @output.puts "Pomodoro ##{@vine.pomodori.count} complete. Break starts now!"
+          emit_notification "Pomodoro ##{@vine.pomodori.count} complete. Break starts now!"
           @vine.current_pomodoro.break_timer.start
         end
 
-        beepbeep
-        @output.puts "Break done!\n"
+        TomatoPaste::Notification.play_audio_alert
 
-        @output.print "Do another Pomodoro? (Y/N): "
+        emit_notification "Break done!"
+
+        @output.print "\nDo another Pomodoro? (Y/N): "
       end while @input.gets.upcase.chomp != "N"
     end
 
     private
-      def beepbeep
-        print "\a"
-        print "\a"
+      def emit_notification(message)
+        @output.puts message
+        TomatoPaste::Notification.display_visual_alert(message)
       end
   end
 end
