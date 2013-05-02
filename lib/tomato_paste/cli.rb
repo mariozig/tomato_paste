@@ -37,7 +37,9 @@ module TomatoPaste
     end
 
     def task_loop(big_break_duration=1200) # 20 minutes
+      trap("INT") { quit_on_interrupt }
       begin
+
         @output.print "\n\n"
         @output.print "Task Description: "
         task_description = @input.gets.chomp
@@ -71,6 +73,13 @@ module TomatoPaste
       def emit_notification(message)
         @output.puts message
         TomatoPaste::Notification.display_visual_alert(message)
+      end
+
+      def quit_on_interrupt
+        @output.puts
+        @output.puts
+        @output.puts "I wish I knew how to quit you."
+        exit
       end
   end
 end
